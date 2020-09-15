@@ -28,30 +28,30 @@
                   <input type="text" name="city" id="city-input" />
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <div class="list-group" id="list-cities">
+                <div class="list-group" id="saved-city-list">
                   <button
                     type="submit"
                     class="list-group-item list-group-item-action"
                   >
-                    Dapibus ac facilisis in
+                    Atlanta
                   </button>
                   <button
                     type="submit"
                     class="list-group-item list-group-item-action"
                   >
-                    Dapibus ac facilisis in
+                    Houston
                   </button>
                   <button
                     type="submit"
                     class="list-group-item list-group-item-action"
                   >
-                    Dapibus ac facilisis in
+                    Boston
                   </button>
                   <button
                     type="submit"
                     class="list-group-item list-group-item-action"
                   >
-                    Dapibus ac facilisis in
+                    Orlando
                   </button>
                 </div>
               </form>
@@ -62,11 +62,11 @@
           <section class="row">
             <div class="card col-lg-12">
               <div class="card-body" id="main-display">
-                <h3>Atlanta (8/15/2020)</h3>
+                <h3 id="city-display">Atlanta (8/15/2020)</h3>
                 <br />
-                <p>Temperature: 90.9 F</p>
-                <p>Humidity: 41%</p>
-                <p>Wind Speed: 4.7 MPH</p>
+                <p id="main-temp">Temperature: 90.9 F</p>
+                <p id="main-hum">Humidity: 41%</p>
+                <p id="wind-speed">Wind Speed: 4.7 MPH</p>
                 <p>
                   UV Index:
                   <button type="button" class="btn btn-danger" disabled>
@@ -119,6 +119,7 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
