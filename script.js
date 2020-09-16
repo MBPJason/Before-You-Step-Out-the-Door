@@ -69,7 +69,29 @@ $(document).ready(function () {
       }).then(function (weatherData) {
         console.log(city);
         console.log(weatherData);
+        var fiveDayForecast = weatherData.daily.slice(0, 5).map((days) => {
+          console.log(days);
+          return days;
+        })
         $("#uv-index").text(weatherData.current.uvi);
+        for (i = 0; i < fiveDayForecast.length; i++) {
+          var card = $("<div>");
+          var date = $("<h5>");
+          var img = $("<img>");
+          var temp = $("<p>");
+          var hum = $("<p>");
+          var trueDate = moment().add(i+1, "days").format("MM/DD/YY");
+
+          card.addClass("card col-lg-2 bg-primary text-white mr-4 my-2");
+          date.text(trueDate);
+          img.attr("src", "http://openweathermap.org/img/wn/" + fiveDayForecast[i].weather[0].icon  + "@2x.png");
+          img.attr("alt", "Image of Weather");
+          temp.text("Temp: " + fiveDayForecast[i].temp.day + " °F");
+          hum.text("Humidity: " + fiveDayForecast[i].humidity + "%")
+
+          forecast.append(card);
+          card.append(date, img, temp, hum);
+        }
       });
     });
   });
