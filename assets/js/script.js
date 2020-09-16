@@ -143,22 +143,14 @@ $(document).ready(function () {
   init();
 
   //============================ Form Submission ===================================
-  form.on("submit", function (event) {
+
+  $("button").on("click", function (event) {
     event.preventDefault();
     event.stopPropagation();
-    event.stop;
-    var city =
+    city =
       uppercaseWords($("#city-input").val().trim().toLowerCase()) ||
       $(this).val();
-    console.log($(this).val());
 
     displayWeatherData();
   });
-
-  // on submit to pulled data from the api
-  // generate tags, populate it with data, append those tags
-
-  // save city searches in localStorage and add them to sessionStorage
-  // use sessionStorage to populate saved city list
-  // use the last city in localStorage to populate webpage on refresh
 });
