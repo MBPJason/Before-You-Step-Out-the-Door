@@ -7,6 +7,7 @@ $(document).ready(function () {
   var mainDisplay = $("#main-display");
   var forecast = $("#five-day-forecast");
   var sessionStorage;
+  var city;
 
   //======================= Functions to be Used ==================================
   const uppercaseWords = (str) =>
@@ -17,13 +18,15 @@ $(document).ready(function () {
 
     if (currentLocalStorage !== null) {
       sessionStorage = JSON.parse(currentLocalStorage);
+      city = JSON.parse(currentLocalStorage).slice(-1).pop();
+      displayWeatherData();
+      previousSearches();
     } else {
       sessionStorage = [];
     }
   }
 
   function previousSearches() {
-    init();
     savedCities.empty();
     sessionStorage.forEach((city) => {
       var cityBtn = $("<button>");
@@ -37,19 +40,7 @@ $(document).ready(function () {
     });
   }
 
-  //===================== Checking Local Storage for data ========================
-  init();
-
-  //============================ Form Submission ===================================
-  form.on("submit", function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    event.stop
-    var city =
-      uppercaseWords($("#city-input").val().trim().toLowerCase()) ||
-      $(this).val();
-    console.log($(this).val());
-
+  function displayWeatherData() {
     var apiKey = "aaed2ca118ea9337d0324934e67d1796";
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -74,7 +65,9 @@ $(document).ready(function () {
       );
       weatherImg.attr("alt", "Weather Image indicator");
       $("#city-display").text(response.name + moment().format("[ (]L[)]"));
-      $("#main-temp").text("Temperature: " + Math.floor(response.main.temp) + " °F");
+      $("#main-temp").text(
+        "Temperature: " + Math.floor(response.main.temp) + " °F"
+      );
       $("#main-hum").text("Humidity: " + response.main.humidity + "%");
       $("#wind.speed").text("Wind Speed: " + response.wind.speed + "MPH");
       $("#city-display").append(weatherImg);
@@ -137,11 +130,29 @@ $(document).ready(function () {
           card.append(date, img, temp, hum);
         }
         //===================== End of For Loop ============================================
-        sessionStorage.push(city);
-        localStorage.setItem("cities", JSON.stringify(sessionStorage));
-        previousSearches();
+        if (sessionStorage.includes(city) == false) {
+          sessionStorage.push(city);
+          localStorage.setItem("cities", JSON.stringify(sessionStorage));
+          previousSearches();
+        }
       });
     });
+  }
+
+  //===================== Checking Local Storage for data ========================
+  init();
+
+  //============================ Form Submission ===================================
+  form.on("submit", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stop;
+    var city =
+      uppercaseWords($("#city-input").val().trim().toLowerCase()) ||
+      $(this).val();
+    console.log($(this).val());
+
+    displayWeatherData();
   });
 
   // on submit to pulled data from the api
