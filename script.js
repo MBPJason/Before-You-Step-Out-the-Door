@@ -43,13 +43,16 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (response) {
-        console.log(response);
       var latitude = response.coord.lat;
       var longitude = response.coord.lon;
+      var weatherImg = $("<img>");
+      weatherImg.attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon  + "@2x.png");
+      weatherImg.attr("alt", "Weather Image indicator");
       $("#city-display").text(response.name + moment().format('[ (]L[)]'));
       $("#main-temp").text("Temperature: " + response.main.temp + " °F");
       $("#main-hum").text("Humidity: " + response.main.humidity + "%");
       $("#wind.speed").text("Wind Speed: " + response.wind.speed + "MPH");
+      $("#city-display").append(weatherImg);
 //=======================================================================
 
 //========== Getting Weather Data and placing it in the DOM =============
@@ -66,6 +69,7 @@ $(document).ready(function () {
       }).then(function (weatherData) {
         console.log(city);
         console.log(weatherData);
+        $("#uv-index").text(weatherData.current.uvi);
       });
     });
   });
