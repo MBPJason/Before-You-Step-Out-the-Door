@@ -8,7 +8,7 @@ A weather app using the Open Weather Map API to retrieve weather in a location w
 
 ## Where to access
 
-Access website: [Get Your City Forecast Here](https://mbpjason.github.io/Before-You-Step-Out-the-Door/)
+Access website: [Get Your City Forecast](https://mbpjason.github.io/Before-You-Step-Out-the-Door/)
 
 ## Accessability
 

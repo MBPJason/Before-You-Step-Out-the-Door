@@ -13,6 +13,7 @@ $(document).ready(function () {
   const uppercaseWords = (str) =>
     str.replace(/^(.)|\s+(.)/g, (c) => c.toUpperCase());
 
+  // Checks Local Storage for data and displays if there is any
   function init() {
     var currentLocalStorage = localStorage.getItem("cities");
 
@@ -25,7 +26,7 @@ $(document).ready(function () {
       sessionStorage = [];
     }
   }
-
+// Takes localStorage data and displays it on the screen to be clicked on
   function previousSearches() {
     savedCities.empty();
     sessionStorage.forEach((city) => {
@@ -40,6 +41,7 @@ $(document).ready(function () {
     });
   }
 
+  // The Main Engine takes city data and inputs and displays all of it on the webpage
   function displayWeatherData() {
     var apiKey = "aaed2ca118ea9337d0324934e67d1796";
     var queryURL =
@@ -130,6 +132,9 @@ $(document).ready(function () {
           card.append(date, img, temp, hum);
         }
         //===================== End of For Loop ============================================
+        
+        // Checks for duplicates of cites in the list and if there isn't it adds it to
+        // Local Storage
         if (sessionStorage.includes(city) == false) {
           sessionStorage.push(city);
           localStorage.setItem("cities", JSON.stringify(sessionStorage));
@@ -139,11 +144,10 @@ $(document).ready(function () {
     });
   }
 
-  //===================== Checking Local Storage for data ========================
+  //=============================== Start up  ======================================
   init();
 
   //============================ Form Submission ===================================
-
   $("button").on("click", function (event) {
     event.preventDefault();
     event.stopPropagation();
